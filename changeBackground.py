@@ -12,6 +12,12 @@ if os.path.exists(r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg"):
 page = requests.get("https://apod.nasa.gov/apod/astropix.html")
 soup = BeautifulSoup(page.text, "html.parser")
 APOD = soup.find_all('img')
+# Get the image's description/explanation
+description = soup.find_all('p')
+
+# Print the image's description to the cmd shell
+if len(description) != 0 :
+        print(description[0])
 
 # If there is an image today, set it as the background. 
 if len(APOD) != 0:
@@ -21,6 +27,8 @@ if len(APOD) != 0:
     image.write(urllib.request.urlopen(APODURL).read())
     # Set Image as background
     ctypes.windll.user32.SystemParametersInfoW(20, 0, r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg", 0)
+
 # Otherwise, use the default
 else:
     ctypes.windll.user32.SystemParametersInfoW(20, 0, r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\default.jpg", 0)
+
