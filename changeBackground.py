@@ -15,9 +15,12 @@ APOD = soup.find_all('img')
 # Get the image's description/explanation
 description = soup.find_all('p')
 
-# Print the image's description to the cmd shell
-if len(description) != 0 :
-        print(description[0])
+# Print the image's description to the cmd shell, after formatting it correctly
+if len(description) >= 3:
+    first = "\n"
+    second = " "
+    translation1 = description[2].getText().maketrans(first, second)
+    print(description[2].getText().translate(translation1))
 
 # If there is an image today, set it as the background. 
 if len(APOD) != 0:
