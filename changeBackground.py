@@ -5,8 +5,8 @@ import requests
 import ctypes
 
 # Check if there is currently an image saved, and delete it if it does exist
-if os.path.exists(r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg"):
-    os.remove(r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg")
+if os.path.exists(r"INSERT_PATH_HERE"):
+    os.remove(r"INSERT_PATH_HERE")
 
 # Scrape img from page and store the URL to it's source, if there is one
 page = requests.get("https://apod.nasa.gov/apod/astropix.html")
@@ -26,12 +26,12 @@ if len(description) >= 3:
 if len(APOD) != 0:
     APODURL = "https://apod.nasa.gov/apod/" + str(APOD[0]["src"])
     # Store the Image locally
-    image = open(r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg", "wb")
+    image = open(r"INSERT_PATH_HERE", "wb")
     image.write(urllib.request.urlopen(APODURL).read())
     # Set Image as background
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\APOD.jpg", 0)
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, r"INSERT_PATH_HERE", 0)
 
 # Otherwise, use the default
 else:
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, r"C:\Users\uther\OneDrive\Documents\backgroundAPOD\default.jpg", 0)
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, r"INSERT_PATH_HERE", 0)
 
